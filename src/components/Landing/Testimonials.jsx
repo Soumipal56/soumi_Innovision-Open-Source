@@ -32,18 +32,18 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="relative w-screen py-20 md:py-32 overflow-hidden bg-background">
+    <section className="relative w-screen py-16 md:py-24 overflow-hidden bg-background">
       <div className="container relative z-10 px-4 md:px-6 mx-auto">
         <ScrollReveal direction="up">
-          <div className="flex flex-col items-center justify-center text-center mb-16">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border text-foreground text-sm font-light mb-4">
               <Users className="h-3.5 w-3.5" /> Testimonials
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4 text-foreground">
-              What Our Users{" "}
-              <span className="text-blue-500">Say</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-tight mb-6 text-black">
+              What Our Users <br />
+              <span className="text-accent bg-black px-2">Say.</span>
             </h2>
-            <p className="max-w-2xl text-muted-foreground text-lg font-light">
+            <p className="max-w-2xl text-muted-foreground text-lg font-outfit font-medium">
               Join thousands of satisfied learners who have transformed their knowledge with InnoVision.
             </p>
           </div>
@@ -52,30 +52,28 @@ const Testimonials = () => {
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <ScrollReveal key={testimonial.name} delay={index * 150} direction="up">
-              <Card className="group relative overflow-hidden border border-border bg-background backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-2 h-full">
-                <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Quote className="h-12 w-12 text-foreground" />
+              <Card className="group relative overflow-hidden border border-black/5 bg-white transition-all duration-700 hover:border-black/20 hover:shadow-2xl h-full rounded-3xl">
+                <div className="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <Quote className="h-16 w-16 text-black" />
                 </div>
-                <CardHeader className="pb-2">
+                <CardHeader className="pb-4">
                   <div className="flex items-center gap-4">
-                    <div className="p-0.5 rounded-full border border-border">
-                      <div className="h-12 w-12 rounded-full bg-background flex items-center justify-center font-light text-lg text-foreground">
-                        {testimonial.initials}
-                      </div>
+                    <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center font-bold font-outfit text-xl text-black border-2 border-white shadow-lg">
+                      {testimonial.initials}
                     </div>
                     <div>
-                      <p className="font-light text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground font-light">{testimonial.role}</p>
+                      <p className="font-bold font-outfit text-black text-lg">{testimonial.name}</p>
+                      <p className="text-sm text-muted-foreground font-outfit font-medium uppercase tracking-wider">{testimonial.role}</p>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6">
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-blue-500 text-blue-500" />
+                      <Star key={i} className="h-4 w-4 fill-black text-black" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground leading-relaxed font-light">"{testimonial.content}"</p>
+                  <p className="text-black/80 leading-relaxed font-outfit font-medium text-lg italic">"{testimonial.content}"</p>
                 </CardContent>
               </Card>
             </ScrollReveal>

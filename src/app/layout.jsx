@@ -1,4 +1,4 @@
-import { Roboto, Roboto_Mono } from "next/font/google";
+import { Inter, Roboto_Mono, Fredoka, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "@/components/ui/sonner";
@@ -11,10 +11,19 @@ import OfflineIndicator from "@/components/OfflineIndicator";
 import NotificationChecker from "@/components/NotificationChecker";
 import { Analytics } from "@vercel/analytics/next";
 
-const robotoSans = Roboto({
-  variable: "--font-roboto-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "700"], // Specify font weights if needed
+});
+
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
+  subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
 });
 
 const robotoMono = Roboto_Mono({
@@ -62,7 +71,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/InnoVision_LOGO-removebg-preview.png" />
         <link rel="apple-touch-icon" href="/InnoVision_LOGO-removebg-preview.png" />
       </head>
-      <body className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${fredoka.variable} ${outfit.variable} ${robotoMono.variable} antialiased font-sans`}>
         <AuthProvider>
           <XpProvider>
             <NightModeProvider>

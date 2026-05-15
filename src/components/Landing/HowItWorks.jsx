@@ -16,18 +16,18 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="relative w-screen py-20 md:py-32 overflow-hidden bg-background">
+    <section id="how-it-works" className="relative w-screen py-16 md:py-24 overflow-hidden bg-background">
       <div className="container relative z-10 px-4 md:px-6 mx-auto">
         <ScrollReveal direction="up">
-          <div className="flex flex-col items-center justify-center text-center mb-16">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border text-foreground text-sm font-light mb-4">
               <Map className="h-3.5 w-3.5" /> How It Works
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4 text-foreground">
-              Your Learning Journey{" "}
-              <span className="text-blue-500">Simplified</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-tight mb-6 text-black">
+              Your Learning Journey <br />
+              <span className="text-accent bg-black px-2">Simplified.</span>
             </h2>
-            <p className="max-w-2xl text-muted-foreground text-lg font-light">
+            <p className="max-w-2xl text-muted-foreground text-lg font-outfit font-medium">
               Creating your personalized learning experience is simple and fast.
             </p>
           </div>
@@ -41,17 +41,15 @@ const HowItWorks = () => {
                   {index < steps.length - 1 && (
                     <div className="hidden md:block absolute top-10 left-[60%] w-full h-0.5 bg-border" />
                   )}
-                  <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background border border-border hover:border-border/60 transition-all duration-300 hover:-translate-y-2 h-full group">
-                    <div className="relative w-16 h-16 rounded-2xl border border-border p-0.5 mb-4 transition-all duration-300 group-hover:border-border/60" style={{ borderColor: `${step.color}20` }}>
-                      <div className="w-full h-full rounded-2xl bg-background flex items-center justify-center">
-                        <step.icon className="h-7 w-7 transition-colors" style={{ color: step.color }} />
-                      </div>
-                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-light shadow-lg" style={{ backgroundColor: step.color }}>
+                  <div className="flex flex-col items-center text-center p-8 rounded-3xl bg-white border border-black/5 hover:border-black/20 transition-all duration-700 hover:shadow-2xl h-full group">
+                    <div className="relative w-20 h-20 rounded-full bg-secondary flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110">
+                      <step.icon className="h-8 w-8 text-black" />
+                      <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center bg-black text-white text-xs font-bold font-outfit shadow-xl border-2 border-white">
                         {step.number}
                       </div>
                     </div>
-                    <h3 className="text-lg font-light mb-2 text-foreground">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed font-light">{step.description}</p>
+                    <h3 className="text-xl font-bold font-outfit mb-3 text-black tracking-tight">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-outfit font-medium">{step.description}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -61,23 +59,23 @@ const HowItWorks = () => {
 
         <ScrollReveal direction="up" delay={400}>
           <div className="max-w-2xl mx-auto">
-            <div className="relative rounded-2xl border border-border bg-background backdrop-blur-sm p-8 overflow-hidden">
-              <div className="relative space-y-6">
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-light text-foreground">Try it now</h3>
-                  <p className="text-muted-foreground font-light">Enter a topic you'd like to learn about and see how InnoVision works.</p>
+            <div className="relative rounded-3xl border border-black/5 bg-white shadow-xl p-10 overflow-hidden">
+              <div className="relative space-y-8">
+                <div className="space-y-3">
+                  <h3 className="text-3xl font-display uppercase text-black">Try it now</h3>
+                  <p className="text-muted-foreground font-outfit font-medium">Enter a topic you'd like to learn about and see how InnoVision works.</p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <input
-                      className="w-full h-12 rounded-full border border-border bg-background pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-all font-light"
+                      className="w-full h-14 rounded-full border border-black/10 bg-secondary/30 pl-12 pr-6 text-sm text-black placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 transition-all font-outfit font-bold"
                       placeholder="e.g., Machine Learning, Web Development..."
                     />
                   </div>
                   <AlertDialog>
-                    <AlertDialogTrigger className="h-12 px-6 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-light flex items-center justify-center gap-2 transition-all hover:scale-105">
-                      Generate Course <ArrowRight className="h-4 w-4" />
+                    <AlertDialogTrigger className="h-14 px-10 rounded-full bg-black text-white font-outfit font-bold flex items-center justify-center gap-3 transition-all hover:scale-[1.05] shadow-lg">
+                      Generate Course <ArrowRight className="h-5 w-5" />
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>

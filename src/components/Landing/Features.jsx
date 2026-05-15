@@ -27,7 +27,7 @@ const FeatureCard3D = ({ feature, premium, index = 0 }) => {
   return (
     <ScrollReveal delay={index * 100} direction="up">
       <Card
-        className="group relative overflow-hidden border border-border bg-background backdrop-blur-sm transition-all duration-500 hover:border-border/60 hover:-translate-y-2 h-full cursor-pointer"
+        className="group relative overflow-hidden border border-black/5 bg-white transition-all duration-700 hover:border-black/20 hover:-translate-y-2 h-full cursor-pointer shadow-sm hover:shadow-2xl"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -64,8 +64,8 @@ const FeatureCard3D = ({ feature, premium, index = 0 }) => {
           >
             <feature.icon className="h-6 w-6 transition-all duration-500" style={{ color: feature.color }} />
           </div>
-          <CardTitle className={`text-lg font-light mb-2 text-foreground ${premium ? 'pr-16' : ''}`}>{feature.title}</CardTitle>
-          <CardDescription className="text-muted-foreground leading-relaxed text-sm font-light">{feature.description}</CardDescription>
+          <CardTitle className={`text-xl font-bold font-outfit mb-2 text-black ${premium ? 'pr-16' : ''}`}>{feature.title}</CardTitle>
+          <CardDescription className="text-muted-foreground leading-relaxed text-sm font-outfit font-medium">{feature.description}</CardDescription>
         </CardHeader>
       </Card>
     </ScrollReveal>
@@ -120,13 +120,15 @@ const uxFeatures = [
 const FeatureCard = ({ feature, premium, index = 0 }) => <FeatureCard3D feature={feature} premium={premium} index={index} />;
 
 const FeatureSection = ({ icon: Icon, iconColor, title, features, columns = 3, badge }) => (
-  <div className="mb-20">
+  <div className="mb-16">
     <ScrollReveal direction="up">
-      <div className="flex items-center justify-center gap-2 mb-8">
-        <Icon className="h-5 w-5 text-blue-500" />
-        <h3 className="text-xl font-light text-foreground">{title}</h3>
+      <div className="flex items-center justify-center gap-4 mb-10">
+        <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center">
+          <Icon className="h-5 w-5 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold font-outfit text-black tracking-tight">{title}</h3>
         {badge && (
-          <span className="px-2 py-0.5 rounded-full border border-blue-500/20 text-blue-400 text-xs font-light">
+          <span className="px-3 py-1 rounded-full bg-accent text-black text-xs font-bold font-outfit uppercase tracking-wider">
             {badge}
           </span>
         )}
@@ -153,21 +155,21 @@ const Features = () => {
   const [showAllPremium, setShowAllPremium] = useState(false);
 
   return (
-    <section id="features" className="relative w-screen py-20 md:py-32 bg-background">
+    <section id="features" className="relative w-screen py-16 md:py-24 bg-background">
       <div className="container relative z-10 px-4 md:px-6 mx-auto">
         {/* Why Choose InnoVision Section */}
         <ScrollReveal direction="up">
-          <div className="flex flex-col items-center justify-center text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4 text-foreground">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-tight mb-6 text-black">
               Why Choose InnoVision?
             </h2>
-            <p className="max-w-2xl text-muted-foreground text-lg mb-12 font-light">
+            <p className="max-w-2xl text-muted-foreground text-lg mb-12 font-outfit font-medium">
               Our platform combines cutting-edge AI with proven learning methodologies to create the most effective learning experience.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-24">
           {whyChooseFeatures.map((feature, index) => (
             <FeatureCard key={feature.title} feature={feature} index={index} />
           ))}
@@ -175,15 +177,15 @@ const Features = () => {
 
         {/* All Features Section */}
         <ScrollReveal direction="up">
-          <div className="flex flex-col items-center justify-center text-center mb-16">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border text-foreground text-sm font-light mb-4">
               <Zap className="h-3.5 w-3.5" /> 50+ Features
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4 text-foreground">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-tight mb-6 text-black">
               Everything You Need to{" "}
-              <span className="text-blue-500">Learn Effectively</span>
+              <span className="text-accent bg-black px-2">Learn Effectively</span>
             </h2>
-            <p className="max-w-2xl text-muted-foreground text-lg font-light">
+            <p className="max-w-2xl text-muted-foreground text-lg font-outfit font-medium">
               Explore our comprehensive suite of features designed to enhance your learning journey.
             </p>
           </div>
@@ -193,7 +195,7 @@ const Features = () => {
         <FeatureSection icon={Gamepad2} iconColor="text-yellow-500" title="Gamification & Rewards" features={gamificationFeatures} />
         <FeatureSection icon={BookOpen} iconColor="text-purple-500" title="Enhanced Learning Experience" features={learningFeatures} />
 
-        <div className="mb-20">
+        <div className="mb-16">
           <FeatureSection icon={Crown} iconColor="text-blue-500" title="Premium Features" features={showAllPremium ? premiumFeatures : premiumFeatures.slice(0, 4)} columns={4} badge="7-Day Free Trial" />
           {premiumFeatures.length > 4 && (
             <div className="flex justify-center mt-6">
@@ -206,21 +208,21 @@ const Features = () => {
 
         <FeatureSection icon={Users} iconColor="text-blue-500" title="User Experience" features={uxFeatures} columns={4} />
 
-        <StaggerReveal className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl mx-auto" staggerDelay={100}>
+        <StaggerReveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-5xl mx-auto" staggerDelay={100}>
           {[
-            { icon: Shield, label: "Secure", desc: "Data Protected", color: "#10b981" },
-            { icon: CheckCircle, label: "PWA Support", desc: "Install as App", color: "#3b82f6" },
-            { icon: Globe, label: "Multi-language", desc: "100+ Languages", color: "#a855f7" },
-            { icon: Download, label: "Offline Mode", desc: "Learn Anywhere", color: "#f97316" },
-            { icon: Code, label: "Code Editor", desc: "Built-in IDE", color: "#06b6d4" },
-            { icon: Crown, label: "PRO Badge", desc: "Premium Users", color: "#eab308" },
+            { icon: Shield, label: "Secure", desc: "Data Protected", color: "#000000" },
+            { icon: CheckCircle, label: "PWA Support", desc: "Install as App", color: "#000000" },
+            { icon: Globe, label: "Multi-language", desc: "100+ Languages", color: "#000000" },
+            { icon: Download, label: "Offline Mode", desc: "Learn Anywhere", color: "#000000" },
+            { icon: Code, label: "Code Editor", desc: "Built-in IDE", color: "#000000" },
+            { icon: Crown, label: "PRO Badge", desc: "Premium Users", color: "#000000" },
           ].map((item) => (
-            <div key={item.label} className="text-center p-4 rounded-xl bg-background border border-border hover:border-border/60 transition-all duration-300 hover:scale-105 cursor-default group">
-              <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center mx-auto mb-3 group-hover:border-border/60 transition-colors" style={{ borderColor: `${item.color}20` }}>
-                <item.icon className="h-5 w-5" style={{ color: item.color }} />
+            <div key={item.label} className="text-center p-6 rounded-3xl bg-white border border-black/5 hover:border-black/20 hover:shadow-xl transition-all duration-500 cursor-default group">
+              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <item.icon className="h-6 w-6 text-black" />
               </div>
-              <p className="font-light text-sm text-foreground">{item.label}</p>
-              <p className="text-xs text-muted-foreground font-light">{item.desc}</p>
+              <p className="font-bold font-outfit text-sm text-black mb-1">{item.label}</p>
+              <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">{item.desc}</p>
             </div>
           ))}
         </StaggerReveal>

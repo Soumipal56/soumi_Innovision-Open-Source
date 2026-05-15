@@ -11,6 +11,9 @@ const Hero = () => {
 
   return (
     <section className="relative w-full min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden px-4">
+      {/* Bottom glow effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-linear-to-t from-blue-500/10 to-transparent pointer-events-none" />
+      
       {/* Gradient orbs */}
       <div
         className={`absolute ${effects.gradient.orb1.position} ${effects.gradient.orb1.size} ${effects.gradient.orb1.color} rounded-full ${effects.blur["3xl"]} animate-pulse`}
@@ -21,57 +24,47 @@ const Hero = () => {
         style={{ animationDuration: effects.gradient.orb2.duration, animationDelay: effects.gradient.orb2.delay }}
       />
 
-      <div className="container relative z-10 mx-auto px-2 sm:px-4 md:px-6 py-8 sm:py-12 md:pb-24 pt-12">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-16 md:pb-20 pt-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Badge */}
           <div
-            className={`${components.badge.base} ${components.badge.hover} mb-6 sm:mb-8 animate-fade-in`}
+            className={`${components.badge.base} ${components.badge.hover} mb-10 animate-fade-in`}
             style={{ animationDelay: animations.delay.badge }}
           >
-            <Sparkles
-              aria-hidden="true"
-              className="h-3 w-3 sm:h-4 sm:w-4"
-              style={{ color: colors.primary.blue }}
-            />
+            <Sparkles className="h-4 w-4" />
             <span>AI-Powered Learning Platform</span>
-            <span className="px-1.5 sm:px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] sm:text-xs">New</span>
           </div>
 
-          {/* Logo with glow */}
+          {/* Central Accent Icon — Minimalist */}
           <div
-            className="mb-4 sm:mb-6 animate-fade-in relative group"
+            className="mb-8 animate-fade-in relative group"
             style={{ animationDelay: animations.delay.logo }}
           >
-            <div className={`absolute inset-0 bg-blue-500/20 rounded-full ${effects.blur["2xl"]} group-hover:bg-blue-500/30 transition-all duration-500`} />
-            <Image
-              src="/InnoVision_LOGO-removebg-preview.png"
-              alt="InnoVision Logo"
-              width={80}
-              height={80}
-              priority
-              className="w-14 h-14 sm:w-20 sm:h-20 relative z-10 group-hover:scale-110 transition-transform duration-500"
-            />
+            <div className={`absolute inset-0 bg-accent rounded-full blur-[80px] group-hover:bg-accent/60 transition-all duration-700 scale-125 opacity-30`} />
+            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-black/5 bg-white/40 backdrop-blur-xl flex items-center justify-center relative z-10 group-hover:scale-110 transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+              <Sparkles className="h-10 w-10 sm:h-14 w-14 text-black group-hover:rotate-12 transition-transform duration-500" />
+            </div>
           </div>
 
-          {/* Main heading with gradient */}
-          <h1 className={`${typography.hero.title} mb-4 sm:mb-6`}>
+          {/* Main heading with bubbly display font */}
+          <h1 className={`${typography.hero.title} mb-8 sm:mb-10 text-black uppercase tracking-tight`}>
             <span
-              className="block text-foreground animate-fade-in"
+              className="block animate-fade-in"
               style={{ animationDelay: animations.delay.heading }}
             >
-              Learn Any Topic
+              Learn Any Topic.
             </span>
             <span
-              className={`block bg-linear-to-r ${colors.primary.gradient} bg-clip-text text-transparent animate-fade-in animate-gradient`}
+              className="block animate-fade-in"
               style={{ animationDelay: animations.delay.subheading }}
             >
-              with AI-Generated Courses
+              AI-Generated.
             </span>
           </h1>
 
           {/* Subtitle */}
           <p
-            className={`${typography.hero.subtitle} text-muted-foreground max-w-2xl mb-4 sm:mb-6 leading-relaxed animate-fade-in px-2`}
+            className={`${typography.hero.subtitle} text-foreground/70 max-w-2xl mb-8 sm:mb-12 leading-relaxed animate-fade-in px-2`}
             style={{ animationDelay: animations.delay.subtitle }}
           >
             Generate personalized courses on any topic in seconds. From programming to philosophy,
@@ -98,36 +91,28 @@ const Hero = () => {
             })}
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons — High End Studio Style */}
           <div
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 animate-fade-in w-full sm:w-auto"
             style={{ animationDelay: animations.delay.buttons }}
           >
             <MagneticButton strength={0.2}>
-              <Link href="/login" className="w-full sm:w-auto">
+              <Link href="/login">
                 <Button
-                  size="lg"
-                  aria-label="Get started with InnoVision for free"
-                  className={`h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-light gap-2 ${components.button.primary} w-full sm:w-auto`}
+                  className={`${components.button.primary} gap-4`}
                 >
                   Get Started Free
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-6 w-6" />
                 </Button>
               </Link>
             </MagneticButton>
-            <MagneticButton strength={0.2}>
-              <Link href="/demo" className="w-full sm:w-auto">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  aria-label="Watch product demo"
-                  className={`h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-light gap-2 ${components.button.secondary} w-full sm:w-auto group`}
-                >
-                  <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                  See Demo
-                </Button>
-              </Link>
-            </MagneticButton>
+            
+            <button className="flex items-center gap-2 text-black font-bold font-outfit group hover:opacity-70 transition-all">
+              <div className="w-12 h-12 rounded-full border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
+                <Play className="h-5 w-5 fill-current" />
+              </div>
+              <span>Watch Demo</span>
+            </button>
           </div>
 
           {/* Stats with Animated Counters */}

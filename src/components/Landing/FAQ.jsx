@@ -55,15 +55,15 @@ const faqs = [
 ];
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
-  <div className={`rounded-2xl border border-border bg-background backdrop-blur-sm overflow-hidden transition-all duration-300 ${isOpen ? 'border-blue-500/30' : 'hover:border-border/60'}`}>
-    <button onClick={onClick} className="flex w-full items-center justify-between p-5 text-left group">
-      <span className="font-light pr-4 group-hover:text-blue-500 transition-colors text-foreground">{question}</span>
-      <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-blue-500 text-white' : 'border border-border text-foreground group-hover:border-blue-500/30'}`}>
-        {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+  <div className={`rounded-3xl border transition-all duration-500 overflow-hidden ${isOpen ? 'border-black bg-white shadow-2xl' : 'border-black/5 bg-white hover:border-black/20 hover:shadow-xl'}`}>
+    <button onClick={onClick} className="flex w-full items-center justify-between p-6 text-left group">
+      <span className={`text-lg font-bold font-outfit pr-6 transition-colors ${isOpen ? 'text-black' : 'text-black/60 group-hover:text-black'}`}>{question}</span>
+      <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-black text-white rotate-180' : 'bg-secondary text-black group-hover:bg-black group-hover:text-white'}`}>
+        {isOpen ? <Minus className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
       </div>
     </button>
-    <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-      <div className="px-5 pb-5 text-muted-foreground leading-relaxed font-light">{answer}</div>
+    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className="px-6 pb-6 text-muted-foreground leading-relaxed font-outfit font-medium border-t border-black/5 pt-4">{answer}</div>
     </div>
   </div>
 );
@@ -77,18 +77,18 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="relative w-screen py-20 md:py-32 bg-background">
+    <section id="faq" className="relative w-screen py-16 md:py-24 bg-background">
       <div className="container relative z-10 px-4 mx-auto md:px-6">
         <ScrollReveal direction="up">
-          <div className="flex flex-col items-center justify-center text-center mb-16">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border text-foreground text-sm font-light mb-4">
               <HelpCircle className="h-3.5 w-3.5" /> FAQ
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4 text-foreground">
-              Frequently Asked{" "}
-              <span className="text-blue-500">Questions</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-tight mb-6 text-black">
+              Frequently Asked <br />
+              <span className="text-accent bg-black px-2">Questions.</span>
             </h2>
-            <p className="max-w-2xl text-muted-foreground text-lg font-light">
+            <p className="max-w-2xl text-muted-foreground text-lg font-outfit font-medium">
               Find answers to common questions about InnoVision's AI-powered learning platform.
             </p>
           </div>
@@ -107,12 +107,12 @@ const FAQ = () => {
           ))}
         </div>
         {visibleCount < faqs.length && (
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-12">
             <button
               onClick={handleLoadMore}
-              className="px-6 py-3 bg-blue-500 text-white rounded-full font-light hover:bg-blue-600 transition-colors"
+              className="px-10 py-4 bg-black text-white rounded-full font-outfit font-bold hover:scale-[1.05] transition-all shadow-lg"
             >
-              Load More
+              Load More Questions
             </button>
           </div>
         )}

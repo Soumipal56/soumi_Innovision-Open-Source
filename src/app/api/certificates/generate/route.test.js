@@ -1,24 +1,43 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { POST } from './route';
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/firebase';
-import { getDoc, getDocs, addDoc } from 'firebase/firestore';
+import { getAdminDb, FieldValue } from '@/lib/firebase-admin';
 
 // Mock dependencies
-vi.mock('@/lib/firebase', () => ({
-  db: {},
+vi.mock('@/lib/firebase-admin', () => ({
+  getAdminDb: vi.fn(),
+  FieldValue: {
+    serverTimestamp: vi.fn(() => new Date()),
+  },
 }));
 
-vi.mock('firebase/firestore', () => ({
-  collection: vi.fn(),
-  doc: vi.fn(),
-  getDoc: vi.fn(),
-  getDocs: vi.fn(),
-  query: vi.fn(),
-  where: vi.fn(),
-  addDoc: vi.fn(),
-  serverTimestamp: vi.fn(() => new Date()),
-}));
+// Mock Firestore operations
+const mockDoc = vi.fn();
+const mockCollection = vi.fn();
+const mockGet = vi.fn();
+const mockAdd = vi.fn();
+const mockWhere = vi.fn();
+
+const mockDb = {
+  collection: mockCollection,
+};
+
+mockCollection.mockReturnValue({
+  doc: mockDoc,
+  where: mockWhere,
+  add: mockAdd,
+});
+
+mockDoc.mockReturnValue({
+  collection: mockCollection,
+  get: mockGet,
+});
+
+mockWhere.mockReturnValue({
+  get: mockGet,
+});
+
+getAdminDb.mockReturnValue(mockDb);
 
 vi.mock('next/server', () => ({
   NextResponse: {
@@ -67,7 +86,7 @@ describe('POST /api/certificates/generate - Bug Condition Exploration', () => {
     const mockError = new Error('Firestore connection timeout');
     mockError.code = 'unavailable';
     
-    getDoc.mockRejectedValue(mockError);
+    mockGet.mockRejectedValue(mockError);
 
     const request = new Request('http://localhost:3000/api/certificates/generate', {
       method: 'POST',
@@ -133,22 +152,21 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
     };
 
     // Mock Firestore responses for successful flow
-    getDoc
+    mockGet
       .mockResolvedValueOnce({
-        exists: () => true,
+        exists: true,
         data: () => mockCourseData,
       })
       .mockResolvedValueOnce({
-        exists: () => true,
+        empty: true,
+        docs: [],
+      })
+      .mockResolvedValueOnce({
+        exists: true,
         data: () => mockUserData,
       });
 
-    getDocs.mockResolvedValue({
-      empty: true,
-      docs: [],
-    });
-
-    addDoc.mockResolvedValue({
+    mockAdd.mockResolvedValue({
       id: 'cert-doc-id',
     });
 
@@ -179,9 +197,9 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
     expect(data.certificate.verified).toBe(true);
 
     // Verify certificate was saved to Firestore
-    expect(addDoc).toHaveBeenCalled();
-    const addDocCall = addDoc.mock.calls[0];
-    expect(addDocCall[1]).toMatchObject({
+    expect(mockAdd).toHaveBeenCalled();
+    const addDocCall = mockAdd.mock.calls[0];
+    expect(addDocCall[0]).toMatchObject({
       certificateId: 'test-cert-id',
       userId: 'test@example.com',
       courseId: 'course123',
@@ -231,20 +249,20 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
       verified: true,
     };
 
-    getDoc.mockResolvedValue({
-      exists: () => true,
-      data: () => mockCourseData,
-    });
-
-    getDocs.mockResolvedValue({
-      empty: false,
-      docs: [
-        {
-          id: 'existing-doc-id',
-          data: () => mockExistingCert,
-        },
-      ],
-    });
+    mockGet
+      .mockResolvedValueOnce({
+        exists: true,
+        data: () => mockCourseData,
+      })
+      .mockResolvedValueOnce({
+        empty: false,
+        docs: [
+          {
+            id: 'existing-doc-id',
+            data: () => mockExistingCert,
+          },
+        ],
+      });
 
     const request = new Request('http://localhost:3000/api/certificates/generate', {
       method: 'POST',
@@ -274,7 +292,7 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
     expect(data.certificate.verified).toBe(true);
 
     // Verify no new certificate was created
-    expect(addDoc).not.toHaveBeenCalled();
+    expect(mockAdd).not.toHaveBeenCalled();
   });
 
   /**
@@ -313,8 +331,8 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
     expect(data.error).toBe('Missing required fields: userId and courseId');
 
     // Verify no database operations were attempted
-    expect(getDoc).not.toHaveBeenCalled();
-    expect(addDoc).not.toHaveBeenCalled();
+    expect(mockGet).not.toHaveBeenCalled();
+    expect(mockAdd).not.toHaveBeenCalled();
   });
 
   /**
@@ -335,8 +353,8 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
 
   it('should return 404 for non-existent course (preservation)', async () => {
     // Arrange - Mock course not found
-    getDoc.mockResolvedValue({
-      exists: () => false,
+    mockGet.mockResolvedValue({
+      exists: false,
     });
 
     const request = new Request('http://localhost:3000/api/certificates/generate', {
@@ -357,7 +375,7 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
     expect(data.error).toBe('Course not found');
 
     // Verify no certificate creation was attempted
-    expect(addDoc).not.toHaveBeenCalled();
+    expect(mockAdd).not.toHaveBeenCalled();
   });
 
   /**
@@ -386,8 +404,8 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
       ],
     };
 
-    getDoc.mockResolvedValue({
-      exists: () => true,
+    mockGet.mockResolvedValue({
+      exists: true,
       data: () => mockCourseData,
     });
 
@@ -409,6 +427,6 @@ describe('POST /api/certificates/generate - Preservation Property Tests', () => 
     expect(data.error).toBe('Course not completed yet');
 
     // Verify no certificate creation was attempted
-    expect(addDoc).not.toHaveBeenCalled();
+    expect(mockAdd).not.toHaveBeenCalled();
   });
 });

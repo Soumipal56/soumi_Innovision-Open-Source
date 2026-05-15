@@ -5,10 +5,10 @@ export const landingTheme = {
   // Color Palette
   colors: {
     primary: {
-      blue: "#3b82f6",
-      purple: "#a855f7",
-      cyan: "#06b6d4",
-      gradient: "from-blue-500 via-purple-500 to-cyan-500",
+      blue: "#000000",
+      purple: "#8b5cf6",
+      cyan: "#38bdf8",
+      gradient: "from-black via-gray-900 to-gray-800",
     },
     accent: {
       yellow: "#eab308",
@@ -99,16 +99,16 @@ export const landingTheme = {
   // Typography
   typography: {
     hero: {
-      title: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight",
-      subtitle: "text-sm sm:text-base md:text-lg lg:text-xl font-light",
+      title: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display uppercase tracking-tight leading-[0.9]",
+      subtitle: "text-lg sm:text-xl md:text-2xl font-outfit opacity-60 max-w-2xl mx-auto",
     },
     section: {
-      title: "text-3xl sm:text-4xl md:text-5xl font-light tracking-tight",
-      subtitle: "text-lg font-light",
+      title: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight",
+      subtitle: "text-lg md:text-xl font-medium opacity-60",
     },
     card: {
-      title: "text-lg font-light",
-      description: "text-sm font-light",
+      title: "text-xl font-bold tracking-tight",
+      description: "text-base opacity-70 leading-relaxed",
     },
   },
 
@@ -151,12 +151,12 @@ export const landingTheme = {
   // Component Styles
   components: {
     badge: {
-      base: "inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/50 backdrop-blur-sm text-sm font-light",
-      hover: "hover:scale-105 transition-transform duration-300",
+      base: "inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-black/10 bg-white shadow-sm text-sm font-outfit font-semibold tracking-tight",
+      hover: "hover:scale-105 transition-all duration-300",
     },
     button: {
-      primary: "bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50",
-      secondary: "border border-border text-foreground hover:bg-muted rounded-full transition-all duration-300 hover:scale-105",
+      primary: "bg-black text-white rounded-full h-16 px-12 text-xl font-outfit font-bold transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:-translate-y-1 active:scale-[0.95]",
+      secondary: "border-2 border-black text-black bg-white rounded-full h-16 px-12 text-xl font-outfit font-bold transition-all duration-500 hover:bg-black hover:text-white hover:scale-[1.05] active:scale-[0.95]",
     },
     card: {
       base: "border border-border bg-background backdrop-blur-sm transition-all duration-500 hover:border-border/60 hover:-translate-y-2",

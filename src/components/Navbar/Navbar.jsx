@@ -161,24 +161,31 @@ const Navbar = () => {
     <>
       <header className="h-16 w-full border-b fixed top-0 left-0 bg-background/80 backdrop-blur-xl z-[100] border-border">
         <div className="h-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 flex items-center justify-between">
-          {/* Logo - Left */}
           <Link
             href={user ? `/roadmap` : "/"}
             className="flex items-center gap-1.5 sm:gap-2 hover:opacity-80 transition-opacity shrink-0"
           >
-            <Image src="/InnoVision_LOGO-removebg-preview.png" alt="logo" width={28} height={28} className="sm:w-8 sm:h-8" />
-            <span className="text-sm sm:text-base font-light text-foreground hidden min-[400px]:block">InnoVision</span>
+            <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center">
+              <Sparkles className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-lg font-bold font-outfit text-foreground hidden min-[400px]:block tracking-tight">InnoVision</span>
           </Link>
 
-          {/* Desktop Navigation - Centered */}
-          <DesktopNav
-            user={user}
-            createMenuItems={createMenuItems}
-            learnMenuItems={learnMenuItems}
-            moreMenuItems={moreMenuItems}
-            landingNavItems={landingNavItems}
-            isActiveLink={isActiveLink}
-          />
+          {/* Centered Theme Toggle / Pills — Inspired by reference */}
+          <div className="hidden md:flex items-center bg-secondary/50 backdrop-blur-md border border-border p-1 rounded-full absolute left-1/2 -translate-x-1/2">
+            <button
+              onClick={() => theme !== "light" && toggleTheme()}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold font-outfit transition-all duration-300 ${theme === "light" ? "bg-white text-black shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              Light
+            </button>
+            <button
+              onClick={() => theme !== "dark" && toggleTheme()}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold font-outfit transition-all duration-300 ${theme === "dark" ? "bg-black text-white shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              Dark
+            </button>
+          </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-0.5 sm:gap-2 shrink-0">
@@ -239,25 +246,36 @@ const Navbar = () => {
 
             {user && <NotificationBell />}
 
-            {/* Theme Toggle - Always visible */}
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-8 w-8 sm:h-9 sm:w-9 rounded-full hover:bg-muted text-foreground">
-              {theme === "light" ? <Moon className="h-4 w-4 sm:h-4 sm:w-4" /> : <Sun className="h-4 w-4 sm:h-4 sm:w-4" />}
-            </Button>
+            {/* Desktop Links (Moved to Right Section for cleaner layout) */}
+            <div className="hidden lg:flex items-center gap-6 mr-4">
+              {user ? (
+                <>
+                  <Link href="/courses" className="text-sm font-bold font-outfit hover:text-primary transition-colors">Courses</Link>
+                  <Link href="/studio" className="text-sm font-bold font-outfit hover:text-primary transition-colors">Studio</Link>
+                </>
+              ) : (
+                <>
+                  <Link href="#features" className="text-sm font-bold font-outfit hover:text-primary transition-colors">Features</Link>
+                  <Link href="#how-it-works" className="text-sm font-bold font-outfit hover:text-primary transition-colors">Work</Link>
+                  <Link href="#contact" className="text-sm font-bold font-outfit hover:text-primary transition-colors">Contact</Link>
+                </>
+              )}
+            </div>
 
-            {/* Night Mode - Always visible */}
+            {/* Night Mode Toggle */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={toggleNightMode}
-                  className={`h-8 w-8 sm:h-9 sm:w-9 rounded-full hover:bg-muted ${nightMode ? 'text-amber-400' : 'text-foreground'}`}
+                  className={`h-9 w-9 rounded-full hover:bg-muted ${nightMode ? 'text-amber-400' : 'text-foreground'}`}
                 >
-                  <MoonStar className={`h-4 w-4 sm:h-4 sm:w-4 ${nightMode ? 'fill-amber-400' : ''}`} />
+                  <MoonStar className={`h-4 w-4 ${nightMode ? 'fill-amber-400' : ''}`} />
                 </Button>
               </TooltipTrigger>
               <TooltipContent className="bg-background border-border">
-                <p className="font-light text-foreground">Night Mode (Blue Light Filter)</p>
+                <p className="font-light text-foreground text-xs">Night Mode</p>
               </TooltipContent>
             </Tooltip>
 

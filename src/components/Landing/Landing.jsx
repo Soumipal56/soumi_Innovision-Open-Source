@@ -36,13 +36,13 @@ export default function Landing() {
         <CTA />
 
         {/* Contact Section */}
-        <section id="contact" className="relative w-screen py-20 md:py-32 bg-background">
+        <section id="contact" className="relative w-screen py-16 md:py-24 bg-background">
           <div className="container relative z-10 px-4 md:px-6 mx-auto">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4 text-foreground">
-                Get in Touch
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-tight mb-6 text-black">
+                Get in <span className="text-accent bg-black px-2">Touch.</span>
               </h2>
-              <p className="text-muted-foreground text-lg font-light">
+              <p className="text-muted-foreground text-lg font-outfit font-medium">
                 Have questions? We'd love to hear from you.
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function Landing() {
                   <input
                     type="email"
                     placeholder="Email"
-                    className="w-full px-5 py-3.5 rounded-full bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-light"
+                    className="w-full px-6 py-4 rounded-full border border-black/10 bg-white text-black placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-black/20 transition-all font-outfit font-bold"
                     required
                   />
                 </div>
@@ -62,7 +62,7 @@ export default function Landing() {
                   <textarea
                     placeholder="Message"
                     rows="5"
-                    className="w-full px-5 py-3.5 rounded-2xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all resize-none font-light"
+                    className="w-full px-6 py-4 rounded-3xl border border-black/10 bg-white text-black placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-black/20 transition-all resize-none font-outfit font-medium"
                     required
                   />
                 </div>
@@ -70,20 +70,19 @@ export default function Landing() {
                 <div className="flex justify-center pt-2">
                   <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                    className="bg-black text-white px-12 py-4 rounded-full font-outfit font-bold transition-all duration-300 hover:scale-105 shadow-xl"
                   >
                     Send Message
                   </button>
                 </div>
               </form>
 
-              <div className="flex justify-center text-muted-foreground space-x-6 mt-12">
+              <div className="flex justify-center text-black font-bold font-outfit space-x-10 mt-16">
                 <a
                   href="https://github.com/ItsVikasA/InnoVision"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50 rounded transition-colors"
+                  className="hover:text-accent transition-colors"
                 >
                   GitHub
                 </a>
@@ -91,8 +90,7 @@ export default function Landing() {
                   href="https://www.linkedin.com/in/vikas028/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50 rounded transition-colors"
+                  className="hover:text-accent transition-colors"
                 >
                   LinkedIn
                 </a>
@@ -100,8 +98,7 @@ export default function Landing() {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Twitter"
-                  className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50 rounded transition-colors"
+                  className="hover:text-accent transition-colors"
                 >
                   Twitter
                 </a>
@@ -115,25 +112,27 @@ export default function Landing() {
           <div className="container mx-auto px-8 md:px-6 py-12">
             <div className="flex justify-evenly max-md:flex-col gap-8">
               {/* Brand */}
-              <div className="space-y-4 md:w-[25%] max-md:w-full">
-                <div className="flex items-center gap-2 font-light text-lg">
-                  <Image
-                    src="/InnoVision_LOGO-removebg-preview.png"
-                    alt="logo"
-                    width={32}
-                    height={32}
-                  />
-                  <span className="text-foreground">InnoVision</span>
+              <div className="space-y-6 md:w-[30%] max-md:w-full">
+                <div className="flex items-center gap-3 font-bold font-outfit text-2xl tracking-tighter">
+                  <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                    <Image
+                      src="/InnoVision_LOGO-removebg-preview.png"
+                      alt="logo"
+                      width={24}
+                      height={24}
+                      className="brightness-200"
+                    />
+                  </div>
+                  <span className="text-black">InnoVision</span>
                 </div>
-                <p className="text-sm text-muted-foreground font-light">
-                  AI-powered learning platform that creates personalized courses on any topic.
+                <p className="text-sm text-muted-foreground font-outfit font-medium leading-relaxed">
+                  The AI-powered learning platform that understands your pace and creates personalized mastery paths for any topic in the world.
                 </p>
               </div>
 
-              {/* Quick Links */}
-              <div className="space-y-4">
-                <h4 className="font-light text-foreground">Quick Links</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+              <div className="space-y-6">
+                <h4 className="font-bold font-outfit text-black uppercase tracking-widest text-xs">Quick Links</h4>
+                <ul className="space-y-3 text-sm text-muted-foreground font-outfit font-medium">
                   <li>
                     <Link
                       href="/features"
@@ -178,9 +177,9 @@ export default function Landing() {
               </div>
 
               {/* Legal */}
-              <div className="space-y-4">
-                <h4 className="font-light text-foreground">Legal</h4>
-                <ul className="space-y-3 text-sm text-muted-foreground">
+              <div className="space-y-6">
+                <h4 className="font-bold font-outfit text-black uppercase tracking-widest text-xs">Legal</h4>
+                <ul className="space-y-4 text-sm text-muted-foreground font-outfit font-medium">
                   <li>
                     <Link
                       href="/privacy"
@@ -201,9 +200,9 @@ export default function Landing() {
               </div>
 
               {/* Social */}
-              <div className="space-y-4">
-                <h4 className="font-light text-foreground">Connect</h4>
-                <div className="flex gap-4 text-muted-foreground">
+              <div className="space-y-6">
+                <h4 className="font-bold font-outfit text-black uppercase tracking-widest text-xs">Connect</h4>
+                <div className="flex gap-5 text-black">
                   <a
                     href="https://github.com/ItsVikasA/InnoVision"
                     target="_blank"
@@ -247,8 +246,8 @@ export default function Landing() {
             </div>
 
             {/* Bottom bar */}
-            <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground font-light">
-              Made with <span className="text-red-500">❤️</span> for learners everywhere
+            <div className="mt-16 pt-8 border-t border-black/5 text-center text-sm text-muted-foreground font-outfit font-bold uppercase tracking-widest">
+              Made with <span className="text-accent bg-black px-2">PASSION</span> for learners everywhere
             </div>
           </div>
         </footer>

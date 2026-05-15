@@ -1,13 +1,14 @@
 "use client";
-import { ArrowRight, Sparkles, Rocket } from "lucide-react";
+import { ArrowRight, Sparkles, Rocket, Play } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ScrollReveal } from "./ScrollReveal";
 import MagneticButton from "./MagneticButton";
+import landingTheme from "@/lib/landing-theme";
 
 const CTA = () => {
   return (
-    <section className="relative w-screen py-20 md:py-32 overflow-hidden bg-background">
+    <section className="relative w-screen py-16 md:py-24 overflow-hidden bg-background">
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
           {/* Badge */}
@@ -20,10 +21,10 @@ const CTA = () => {
 
           {/* Heading */}
           <ScrollReveal direction="up" delay={100}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-foreground mb-6">
-              Ready to Transform Your{" "}
-              <span className="relative inline-block text-blue-500">
-                Learning?
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display uppercase tracking-tight text-black mb-8 leading-[0.9]">
+              Ready to <br />
+              <span className="text-accent bg-black px-4 inline-block transform -rotate-1">
+                Transform?
               </span>
             </h2>
           </ScrollReveal>
@@ -37,30 +38,24 @@ const CTA = () => {
 
           {/* CTA Buttons */}
           <ScrollReveal direction="up" delay={300}>
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
               <MagneticButton strength={0.25}>
                 <Link href="/login">
                   <Button
-                    size="lg"
-                    className="h-14 px-8 text-base font-light gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300 hover:scale-105"
+                    className={`${landingTheme.components.button.primary} gap-4`}
                   >
-                    <Sparkles className="h-5 w-5" />
+                    <Sparkles className="h-6 w-6" />
                     Get Started Free
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-6 w-6" />
                   </Button>
                 </Link>
               </MagneticButton>
-              <MagneticButton strength={0.25}>
-                <Link href="/demo">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="h-14 px-8 text-base font-light bg-transparent border border-border text-foreground hover:bg-muted rounded-full transition-all duration-300 hover:scale-105"
-                  >
-                    See Demo
-                  </Button>
-                </Link>
-              </MagneticButton>
+              <button className="flex items-center gap-2 text-black font-bold font-outfit group hover:opacity-70 transition-all">
+                <div className="w-12 h-12 rounded-full border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
+                  <Play className="h-5 w-5 fill-current" />
+                </div>
+                <span>See Demo</span>
+              </button>
             </div>
           </ScrollReveal>
 

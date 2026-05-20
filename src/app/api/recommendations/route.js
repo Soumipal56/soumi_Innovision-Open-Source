@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { adminDb } from "@/lib/firebase-admin";
 import { getServerSession } from "@/lib/auth-server";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-    apiKey: process.env.GEMINI_API_KEY,
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
-});
+const getOpenAI = () => {
+    if (!process.env.GEMINI_API_KEY) return null;
+    return new OpenAI({
+        apiKey: process.env.GEMINI_API_KEY,
+        baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+    });
+};
 
 // Helper to parse AI JSON response
 function parseJson(response) {
@@ -135,6 +139,9 @@ export async function GET(request) {
 
         Format: \`\`\`json [ { "id": "...", "title": "...", "description": "...", "rationale": "...", "isIdea": ... }, ... ] \`\`\`
         `;
+
+        const openai = getOpenAI();
+        if (!openai) throw new Error("OpenAI not initialized");
 
         const aiResponse = await openai.chat.completions.create({
             model: "gemini-2.0-flash",

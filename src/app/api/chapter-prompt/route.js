@@ -3,10 +3,13 @@ import OpenAI from "openai";
 import { getServerSession } from "@/lib/auth-server";
 import { adminDb } from "@/lib/firebase-admin";
 
-export const openai = new OpenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
-});
+const getOpenAI = () => {
+  if (!process.env.GEMINI_API_KEY) return null;
+  return new OpenAI({
+    apiKey: process.env.GEMINI_API_KEY,
+    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+  });
+};
 
 function parseJson(response) {
   const jsonMatch = response.match(/```json\n([\s\S]*?)\n```/);
@@ -63,6 +66,8 @@ async function generateChapter(prompt, number, roadmapId, session) {
     .doc(number);
 
   try {
+    const openai = getOpenAI();
+    if (!openai) throw new Error("OpenAI not initialized");
     const response = await openai.chat.completions.create({
       model: "gemini-2.0-flash",
       messages: [

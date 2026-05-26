@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/InnoVision_LOGO-removebg-preview.png" />
         <link rel="apple-touch-icon" href="/InnoVision_LOGO-removebg-preview.png" />
       </head>
-      <body className={`${inter.variable} ${fredoka.variable} ${outfit.variable} ${robotoMono.variable} antialiased font-sans`}>
+      <body suppressHydrationWarning className={`${inter.variable} ${fredoka.variable} ${outfit.variable} ${robotoMono.variable} antialiased font-sans`}>
         <AuthProvider>
           <XpProvider>
             <NightModeProvider>
